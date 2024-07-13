@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "sandbox": {
+      "commandName": "Project",
+      "commandLineArgs": "produce banana C:\\kafka_2.12-2.5.0\\config\\producer.properties",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
