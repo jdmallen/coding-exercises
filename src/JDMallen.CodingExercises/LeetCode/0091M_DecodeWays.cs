@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using JDMallen.CodingExercises.LeetCode.Shared;
 
 namespace JDMallen.CodingExercises.LeetCode;
 
@@ -23,8 +24,8 @@ public class DecodeWays
 
 		for (var i = 2; i < s.Length + 1; i++)
 		{
-			int singleSub = StringToInteger_atoi.Atoi(s.Substring(i - 1, 1));
-			int doubleSub = StringToInteger_atoi.Atoi(s.Substring(i - 2, 2));
+			int singleSub = UtilityMethods.Atoi(s.Substring(i - 1, 1));
+			int doubleSub = UtilityMethods.Atoi(s.Substring(i - 2, 2));
 
 			if (doubleSub >= 10 && doubleSub <= 26)
 			{

@@ -1,17 +1,11 @@
-﻿using Xunit;
+﻿using JDMallen.CodingExercises.Codility;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace JDMallen.CodingExercises.Tests;
 
-public class CodilityExerciseTests
+public class CodilityExerciseTests(ITestOutputHelper output)
 {
-	private ITestOutputHelper _output;
-
-	public CodilityExerciseTests(ITestOutputHelper output)
-	{
-		_output = output;
-	}
-
 	[Theory]
 	[InlineData(1041, 5)]
 	[InlineData(32, 0)]
@@ -25,7 +19,7 @@ public class CodilityExerciseTests
 	[InlineData(782345, 8)]
 	public void BinaryGap(int input, int expected)
 	{
-		var exercises = new CodilityExercises();
+		var exercises = new L1E_BinaryGap();
 		int actual = exercises.BinaryGap(input);
 		Assert.Equal(expected, actual);
 	}
@@ -36,7 +30,7 @@ public class CodilityExerciseTests
 	[InlineData(new[]{1, 2, 3, 4}, 4, new[]{1, 2, 3, 4})]
 	public void ArrayRotation(int[] a, int k, int[] expected)
 	{
-		var exercises = new CodilityExercises();
+		var exercises = new L2E_CyclicRotation();
 		var actual = exercises.ArrayRotation(a, k);
 		Assert.Equal(expected, actual);
 	}

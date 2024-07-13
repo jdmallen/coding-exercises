@@ -5,20 +5,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using JDMallen.CodingExercises.LeetCode;
+using JDMallen.CodingExercises.LeetCode.Shared;
 using Xunit;
 using Xunit.Abstractions;
+using ReverseLinkedList = JDMallen.CodingExercises.LeetCode.ReverseLinkedList;
 
 namespace JDMallen.CodingExercises.Tests
 {
-	public class LeetCodeExerciseTests
+	public class LeetCodeExerciseTests(ITestOutputHelper output)
 	{
-		private ITestOutputHelper _output;
-
-		public LeetCodeExerciseTests(ITestOutputHelper output)
-		{
-			_output = output;
-		}
-
 		[Theory]
 		[InlineData("12121", 8)]
 		[InlineData("2101", 1)]
@@ -31,47 +27,47 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData("10011", 0)]
 		public void DecodeWays(string str, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new DecodeWays();
 			int actual = exercises.NumDecodings(str);
 			Assert.Equal(expected, actual);
 		}
 
 		public static IEnumerable<object[]> GetListsToReverse()
 		{
-			yield return new object[]
-			{
+			yield return
+			[
 				new ListNode(
 					1,
 					new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5))))),
 				new ListNode(
 					5,
 					new ListNode(4, new ListNode(3, new ListNode(2, new ListNode(1))))),
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
 				new ListNode(1, new ListNode(2)), new ListNode(2, new ListNode(1)),
-			};
-			yield return new object[] { new ListNode(1), new ListNode(1), };
-			yield return new object[] { null, null, };
+			];
+			yield return [new ListNode(1), new ListNode(1)];
+			yield return [null, null];
 		}
 
 		[Theory]
 		[MemberData(nameof(GetListsToReverse))]
 		public void ReverseList(ListNode head, ListNode expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new ReverseLinkedList();
 			var actual = exercises.ReverseList(head);
 			Assert.Equal(expected, actual);
 		}
 
 		[Theory]
-		[InlineData(new int[] { 7, 1, 5, 3, 6, 4 }, 5)]
-		[InlineData(new int[] { 7, 6, 4, 3, 1 }, 0)]
-		[InlineData(new int[] { 2, 1, 2, 0, 1 }, 1)]
-		[InlineData(new int[] { 2, 4, 1 }, 2)]
+		[InlineData(new[] { 7, 1, 5, 3, 6, 4 }, 5)]
+		[InlineData(new[] { 7, 6, 4, 3, 1 }, 0)]
+		[InlineData(new[] { 2, 1, 2, 0, 1 }, 1)]
+		[InlineData(new[] { 2, 4, 1 }, 2)]
 		public void MaxProfit(int[] prices, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new BestTimeToBuyAndSellStock();
 			int actual = exercises.MaxProfit(prices);
 			Assert.Equal(expected, actual);
 		}
@@ -79,10 +75,10 @@ namespace JDMallen.CodingExercises.Tests
 		[Fact]
 		public void WebCrawler()
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new WebCrawlerMultithreaded();
 			HashSet<string> actual = exercises.Crawl(
 					"http://news.yahoo.com/news/topics/",
-					new HtmlParser())
+					new WebCrawlerMultithreaded.HtmlParser())
 				.ToHashSet();
 			var expected = new HashSet<string>()
 			{
@@ -96,9 +92,9 @@ namespace JDMallen.CodingExercises.Tests
 
 		public static IEnumerable<object[]> GetWords()
 		{
-			yield return new object[]
-			{
-				new string[] { "This", "is", "an", "example", "of", "text", "justification." },
+			yield return
+			[
+				new[] { "This", "is", "an", "example", "of", "text", "justification." },
 				16,
 				new List<string>
 				{
@@ -106,10 +102,10 @@ namespace JDMallen.CodingExercises.Tests
 					"example  of text",
 					"justification.  ",
 				},
-			};
-			yield return new object[]
-			{
-				new string[] { "What", "must", "be", "acknowledgment", "shall", "be" },
+			];
+			yield return
+			[
+				new[] { "What", "must", "be", "acknowledgment", "shall", "be" },
 				16,
 				new List<string>
 				{
@@ -117,10 +113,10 @@ namespace JDMallen.CodingExercises.Tests
 					"acknowledgment  ",
 					"shall be        ",
 				},
-			};
-			yield return new object[]
-			{
-				new string[]
+			];
+			yield return
+			[
+				new[]
 				{
 					"Science",
 					"is",
@@ -151,10 +147,10 @@ namespace JDMallen.CodingExercises.Tests
 					"everything  else  we",
 					"do                  ",
 				},
-			};
-			yield return new object[]
-			{
-				new string[]
+			];
+			yield return
+			[
+				new[]
 				{
 					"ask",
 					"not",
@@ -183,11 +179,11 @@ namespace JDMallen.CodingExercises.Tests
 					"what  you can do",
 					"for your country",
 				},
-			};
+			];
 
-			yield return new object[]
-			{
-				new string[]
+			yield return
+			[
+				new[]
 				{
 					"When",
 					"I",
@@ -350,134 +346,134 @@ namespace JDMallen.CodingExercises.Tests
 					"will  be  will be The future's not ours to see Que sera sera",
 					"What will be, will be Que sera sera...                      ",
 				},
-			};
+			];
 		}
 
 		[Theory]
 		[MemberData(nameof(GetWords))]
 		public void FullJustify(string[] words, int maxWidth, IList<string> expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new TextJustification();
 			IList<string> actual = exercises.FullJustify(words, maxWidth);
 			Assert.Equal(expected, actual);
 		}
 
 		public static IEnumerable<object[]> GetIntervals()
 		{
-			yield return new object[]
-			{
+			yield return
+			[
 				new int[][]
 				{
-					new int[] { 1, 3 },
-					new int[] { 2, 6 },
-					new int[] { 8, 10 },
-					new int[] { 15, 18 },
+					[1, 3],
+					[2, 6],
+					[8, 10],
+					[15, 18],
 				},
-				new int[][] { new int[] { 1, 6 }, new int[] { 8, 10 }, new int[] { 15, 18 } },
-			};
-			yield return new object[]
-			{
-				new int[][] { new int[] { 1, 4 }, new int[] { 4, 5 } },
-				new int[][] { new int[] { 1, 5 } },
-			};
-			yield return new object[]
-			{
+				new int[][] { [1, 6], [8, 10], [15, 18] },
+			];
+			yield return
+			[
+				new int[][] { [1, 4], [4, 5] },
+				new int[][] { [1, 5] },
+			];
+			yield return
+			[
 				new int[][]
 				{
-					new int[] { 2, 3 },
-					new int[] { 4, 5 },
-					new int[] { 6, 7 },
-					new int[] { 8, 9 },
-					new int[] { 1, 10 },
+					[2, 3],
+					[4, 5],
+					[6, 7],
+					[8, 9],
+					[1, 10],
 				},
-				new int[][] { new int[] { 1, 10 } },
-			};
-			yield return new object[]
-			{
-				new int[][] { new int[] { 1, 4 }, new int[] { 2, 3 } },
-				new int[][] { new int[] { 1, 4 } },
-			};
-			yield return new object[]
-			{
+				new int[][] { [1, 10] },
+			];
+			yield return
+			[
+				new int[][] { [1, 4], [2, 3] },
+				new int[][] { [1, 4] },
+			];
+			yield return
+			[
 				new int[][]
 				{
-					new int[] { 2, 3 },
-					new int[] { 4, 6 },
-					new int[] { 5, 7 },
-					new int[] { 3, 4 },
+					[2, 3],
+					[4, 6],
+					[5, 7],
+					[3, 4],
 				},
-				new int[][] { new int[] { 2, 7 } },
-			};
+				new int[][] { [2, 7] },
+			];
 		}
 
 		[Theory]
 		[MemberData(nameof(GetIntervals))]
 		public void MergeIntervals(int[][] intervals, int[][] expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new MergeIntervals();
 			int[][] actual = exercises.Merge(intervals);
 			Assert.Equal(expected, actual);
 		}
 
 		public static IEnumerable<object[]> GetIslands()
 		{
-			yield return new object[]
-			{
+			yield return
+			[
 				new char[][]
 				{
 					//      j ==  0    1    2    3    4
-					new char[] { '1', '1', '0', '0', '0' }, // i == 0
-					new char[] { '1', '1', '0', '0', '0' }, // i == 1
-					new char[] { '0', '0', '1', '0', '0' }, // i == 2
-					new char[] { '0', '0', '0', '1', '1' }, // i == 3
+					['1', '1', '0', '0', '0'], // i == 0
+					['1', '1', '0', '0', '0'], // i == 1
+					['0', '0', '1', '0', '0'], // i == 2
+					['0', '0', '0', '1', '1'], // i == 3
 				},
 				3,
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
 				new char[][]
 				{
 					//      j ==  0    1    2    3    4
-					new char[] { '1', '1', '1', '1', '0' }, // i == 0
-					new char[] { '1', '1', '0', '1', '0' }, // i == 1
-					new char[] { '1', '1', '0', '0', '0' }, // i == 2
-					new char[] { '0', '0', '0', '0', '0' }, // i == 3
+					['1', '1', '1', '1', '0'], // i == 0
+					['1', '1', '0', '1', '0'], // i == 1
+					['1', '1', '0', '0', '0'], // i == 2
+					['0', '0', '0', '0', '0'], // i == 3
 				},
 				1,
-			};
-			yield return new object[]
-			{
-				new char[][] { new char[] { '1', '0' }, new char[] { '0', '1' } }, 2,
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
+				new char[][] { ['1', '0'], ['0', '1'] }, 2,
+			];
+			yield return
+			[
 				new char[][]
 				{
 					//  j ==      0    1    2
-					new char[] { '1', '0', '1' }, // i == 0
-					new char[] { '1', '1', '0' }, // i == 1
-					new char[] { '0', '0', '1' }, // i == 2
+					['1', '0', '1'], // i == 0
+					['1', '1', '0'], // i == 1
+					['0', '0', '1'], // i == 2
 				},
 				3,
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
 				new char[][]
 				{
 					//  j ==      0    1    2
-					new char[] { '1', '0', '3' }, // i == 0
-					new char[] { '4', '5', '0' }, // i == 1
-					new char[] { '0', '0', '9' }, // i == 2
+					['1', '0', '3'], // i == 0
+					['4', '5', '0'], // i == 1
+					['0', '0', '9'], // i == 2
 				},
 				3,
-			};
+			];
 		}
 
 		[Theory]
 		[MemberData(nameof(GetIslands))]
 		public void NumIslands(char[][] grid, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new NumberOfIslands();
 			int actual = exercises.NumIslands(grid);
 			Assert.Equal(expected, actual);
 		}
@@ -488,7 +484,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData(new[] { 2, 0, 2 }, 2)]
 		public void WaterTrap(int[] heights, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new TrappingRainWater();
 			int actual = exercises.Trap(heights);
 			Assert.Equal(expected, actual);
 		}
@@ -499,7 +495,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData(new[] { 2, 0, 2 }, 2)]
 		public void WaterTrapTake2(int[] heights, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new TrappingRainWater();
 			int actual = exercises.TrapTake2(heights);
 			Assert.Equal(expected, actual);
 		}
@@ -510,7 +506,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData(new[] { 2, 0, 2 }, 2)]
 		public void WaterTrapTake3(int[] heights, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new TrappingRainWater();
 			int actual = exercises.TrapTake3(heights);
 			Assert.Equal(expected, actual);
 		}
@@ -526,21 +522,21 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData("GLRLGLLGLGRGLGL", true)] // 0:0
 		public void IsRobotBounded(string instructions, bool expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new RobotBoundedInCircle();
 			bool actual = exercises.IsRobotBounded(instructions);
 			Assert.Equal(expected, actual);
 		}
 
 		public static IEnumerable<object[]> GetNumbers()
 		{
-			yield return new object[]
-			{
+			yield return
+			[
 				new ListNode(1, new ListNode(8, new ListNode(9))),
 				new ListNode(6, new ListNode(4, new ListNode(8))),
 				new ListNode(7, new ListNode(2, new ListNode(8, new ListNode(1)))),
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
 				new ListNode(
 					9,
 					new ListNode(
@@ -560,14 +556,14 @@ namespace JDMallen.CodingExercises.Tests
 								new ListNode(
 									0,
 									new ListNode(0, new ListNode(0, new ListNode(1)))))))),
-			};
+			];
 		}
 
 		[Theory]
 		[MemberData(nameof(GetNumbers))]
 		public void AddTwoNumbers(ListNode num1, ListNode num2, ListNode expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new Add2Numbers();
 			var result = exercises.AddTwoNumbers(num1, num2);
 			bool match = true;
 			var ans1 = result;
@@ -592,7 +588,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData("+-12", 0)]
 		public void StringToInt(string s, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new StringToIntegerAtoi();
 			int result = exercises.MyAtoi(s);
 			Assert.Equal(expected, result);
 		}
@@ -645,7 +641,7 @@ namespace JDMallen.CodingExercises.Tests
 				{
 					if (i % 10000 == 0)
 					{
-						_output.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: Loop #{i}");
+						output.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: Loop #{i}");
 					}
 
 					LruCacheDt2();
@@ -655,7 +651,7 @@ namespace JDMallen.CodingExercises.Tests
 			};
 
 			IEnumerable<Task> tasks =
-				Enumerable.Range(0, 64).Select(i => Task.Factory.StartNew(cacheLoop));
+				Enumerable.Range(0, 64).Select(_ => Task.Factory.StartNew(cacheLoop));
 			await Task.WhenAll(tasks);
 		}
 
@@ -843,7 +839,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData("0000000000000000000000000000000000000000000", "0")]
 		public void LargestPalindromic(string input, string expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new LargestPalindromicNumber();
 			string actual = exercises.LargestPalindromic(input);
 			Assert.Equal(expected, actual);
 		}
@@ -857,7 +853,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData(5, 3, 2)]
 		public void MinimumOperationsToMakeEqual(int x, int y, int expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new MinimumNumberOfOperationsToMakeXAndYEqual();
 			int actual = exercises.MinimumOperationsToMakeEqual(x, y);
 			Assert.Equal(expected, actual);
 		}
@@ -936,7 +932,7 @@ namespace JDMallen.CodingExercises.Tests
 		[InlineData(new[] { 1000000000, 1000000000 }, "10000000001000000000")]
 		public void LargestNumber(int[] input, string expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new LargestNumberFormedFromIntegers();
 			string actual = exercises.LargestNumber(input);
 			Assert.Equal(expected, actual);
 		}
@@ -976,7 +972,7 @@ namespace JDMallen.CodingExercises.Tests
 			"VWFHSJARNPEMOXLTUKICZGYQ")]
 		public void RankTeams(string[] input, string expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new RankTeamsByVotes();
 			string actual = exercises.RankTeams(input);
 			Assert.Equal(expected, actual);
 		}
@@ -987,15 +983,15 @@ namespace JDMallen.CodingExercises.Tests
 		[MemberData(nameof(RemoveCommentsData))]
 		public void RemoveComments(string[] input, string[] expected)
 		{
-			var exercises = new LeetcodeExercises();
+			var exercises = new RemoveCodeComments();
 			string[] actual = exercises.RemoveComments(input).ToArray();
 			Assert.Equal(expected, actual);
 		}
 
 		public static IEnumerable<object[]> RemoveCommentsData()
 		{
-			yield return new object[]
-			{
+			yield return
+			[
 				new[]
 				{
 					"/*Test program */",
@@ -1011,11 +1007,11 @@ namespace JDMallen.CodingExercises.Tests
 					"}",
 				},
 				new[] { "int main()", "{ ", "  ", "int a, b, c;", "a = b + c;", "}" },
-			};
-			yield return new object[]
-			{
+			];
+			yield return
+			[
 				new[] { "a/*comment", "line", "more_comment*/b" }, new[] { "ab" },
-			};
+			];
 		}
 	}
 }

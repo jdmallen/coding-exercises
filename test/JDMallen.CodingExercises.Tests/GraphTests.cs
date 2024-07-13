@@ -1,22 +1,15 @@
-﻿using Xunit;
+﻿using JDMallen.CodingExercises.Graphs;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace JDMallen.CodingExercises.Tests
 {
-	public class GraphTests
+	public class GraphTests(ITestOutputHelper output)
 	{
-
-		private ITestOutputHelper _output;
-
-		public GraphTests(ITestOutputHelper output)
-		{
-			_output = output;
-		}
-
 		[Fact]
 		public void TestDfs()
 		{
-			var entryNode = Graph.GetGraph();
+			Node<string> entryNode = Graph.GetGraph();
 			entryNode.TraverseDfs();
 		}
 	}

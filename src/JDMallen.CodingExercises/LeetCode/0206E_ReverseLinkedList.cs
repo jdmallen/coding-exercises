@@ -1,4 +1,6 @@
-﻿namespace JDMallen.CodingExercises.LeetCode;
+﻿using JDMallen.CodingExercises.LeetCode.Shared;
+
+namespace JDMallen.CodingExercises.LeetCode;
 
 public class ReverseLinkedList
 {
