@@ -362,13 +362,7 @@ namespace JDMallen.CodingExercises.Tests
 		{
 			yield return
 			[
-				new int[][]
-				{
-					[1, 3],
-					[2, 6],
-					[8, 10],
-					[15, 18],
-				},
+				new int[][] { [1, 3], [2, 6], [8, 10], [15, 18], },
 				new int[][] { [1, 6], [8, 10], [15, 18] },
 			];
 			yield return
@@ -378,14 +372,7 @@ namespace JDMallen.CodingExercises.Tests
 			];
 			yield return
 			[
-				new int[][]
-				{
-					[2, 3],
-					[4, 5],
-					[6, 7],
-					[8, 9],
-					[1, 10],
-				},
+				new int[][] { [2, 3], [4, 5], [6, 7], [8, 9], [1, 10], },
 				new int[][] { [1, 10] },
 			];
 			yield return
@@ -395,13 +382,7 @@ namespace JDMallen.CodingExercises.Tests
 			];
 			yield return
 			[
-				new int[][]
-				{
-					[2, 3],
-					[4, 6],
-					[5, 7],
-					[3, 4],
-				},
+				new int[][] { [2, 3], [4, 6], [5, 7], [3, 4], },
 				new int[][] { [2, 7] },
 			];
 		}
@@ -977,8 +958,6 @@ namespace JDMallen.CodingExercises.Tests
 			Assert.Equal(expected, actual);
 		}
 
-
-
 		[Theory]
 		[MemberData(nameof(RemoveCommentsData))]
 		public void RemoveComments(string[] input, string[] expected)
@@ -1012,6 +991,43 @@ namespace JDMallen.CodingExercises.Tests
 			[
 				new[] { "a/*comment", "line", "more_comment*/b" }, new[] { "ab" },
 			];
+		}
+
+		[Theory]
+		[InlineData(
+			new[] { 1, 2, 3, 0, 0, 0 },
+			3,
+			new[] { 2, 5, 6 },
+			3,
+			new[] { 1, 2, 2, 3, 5, 6 })]
+		[InlineData(
+			new[] { 1 },
+			1,
+			new int[] { },
+			0,
+			new[] { 1 })]
+		[InlineData(
+			new[] { 0 },
+			0,
+			new[] { 1 },
+			1,
+			new[] { 1 })]
+		[InlineData(
+			new[] { 0, 0, 0, 0, 0 },
+			0,
+			new[] { 1, 2, 3, 4, 5 },
+			5,
+			new[] { 1, 2, 3, 4, 5 })]
+		public void MergeSortedArray(int[] nums1, int m, int[] nums2, int n, int[] expected)
+		{
+			var exercises = new MergeSortedArray();
+			// exercises.Merge(
+			exercises.MergeOptimized(
+				nums1,
+				m,
+				nums2,
+				n);
+			Assert.Equal(expected, nums1);
 		}
 	}
 }
