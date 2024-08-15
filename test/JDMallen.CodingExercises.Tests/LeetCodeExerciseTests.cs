@@ -1029,5 +1029,20 @@ namespace JDMallen.CodingExercises.Tests
 				n);
 			Assert.Equal(expected, nums1);
 		}
+
+		public static IEnumerable<object[]> MeetingRoomIIMemberData()
+		{
+			yield return [new int[][] { [0, 30], [5, 10], [15, 20] }, 2];
+			yield return [new int[][] { [7, 10], [2, 4] }, 1];
+		}
+
+		[Theory]
+		[MemberData(nameof(MeetingRoomIIMemberData))]
+		public void MeetingRoomsII(int[][] input, int expected)
+		{
+			var exercises = new MeetingRoomsII();
+			var output = exercises.MinMeetingRooms(input);
+			Assert.Equal(expected, output);
+		}
 	}
 }
