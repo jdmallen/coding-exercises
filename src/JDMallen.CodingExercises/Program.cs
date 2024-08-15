@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Running;
 using JDMallen.CodingExercises.Graphs;
 using JDMallen.CodingExercises.LeetCode;
+using JDMallen.CodingExercises.Sorts;
 
 namespace JDMallen.CodingExercises
 {
@@ -37,6 +39,10 @@ namespace JDMallen.CodingExercises
 			// TestBfs();
 			//
 			// await ForLoopBreak();
+
+			var what = Enumerable.Range(1, 10).ToList().Shuffle();
+
+
 		}
 
 		private static async Task ForLoopBreak()
