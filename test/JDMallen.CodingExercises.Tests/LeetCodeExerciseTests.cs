@@ -1021,6 +1021,7 @@ namespace JDMallen.CodingExercises.Tests
 		public void MergeSortedArray(int[] nums1, int m, int[] nums2, int n, int[] expected)
 		{
 			var exercises = new MergeSortedArray();
+
 			// exercises.Merge(
 			exercises.MergeOptimized(
 				nums1,
@@ -1041,8 +1042,150 @@ namespace JDMallen.CodingExercises.Tests
 		public void MeetingRoomsII(int[][] input, int expected)
 		{
 			var exercises = new MeetingRoomsII();
-			var output = exercises.MinMeetingRooms(input);
-			Assert.Equal(expected, output);
+			var actual = exercises.MinMeetingRooms(input);
+			Assert.Equal(expected, actual);
+		}
+
+		public static IEnumerable<object[]> GroupAnagramsMemberData()
+		{
+			yield return
+			[
+				new[] { "eat", "tea", "tan", "ate", "nat", "bat" },
+				new string[][]
+				{
+					["bat"],
+					[
+						"nat",
+						"tan",
+					],
+					[
+						"ate",
+						"eat",
+						"tea",
+					],
+				},
+			];
+
+			yield return
+			[
+				new[] { "" },
+				new string[][] { [""], },
+			];
+
+			yield return
+			[
+				new[] { "a" },
+				new string[][] { ["a"], },
+			];
+		}
+
+		private void AssertEqualIgnoringOrder(
+			IList<IList<string>> expected,
+			IList<IList<string>> actual)
+		{
+			// Order the outer arrays by the sorted contents of the inner arrays
+			var sortedExpected = expected
+				.Select(inner => inner.OrderBy(x => x).ToArray())
+				.OrderBy(inner => string.Join(",", inner))
+				.ToArray();
+
+			var sortedActual = actual
+				.Select(inner => inner.OrderBy(x => x).ToArray())
+				.OrderBy(inner => string.Join(",", inner))
+				.ToArray();
+
+			Assert.Equal(sortedExpected, sortedActual);
+		}
+
+		private void AssertEqualIgnoringOrder<T>(IEnumerable<T> actual, IEnumerable<T> expected)
+		{
+			var sortedActual = actual.Order();
+			var sortedExpected = expected.Order();
+
+			Assert.Equal(sortedExpected, sortedActual);
+		}
+
+		[Theory]
+		[MemberData(nameof(GroupAnagramsMemberData))]
+		public void GroupAnagrams(string[] input, IList<IList<string>> expected)
+		{
+			var exercises = new GroupAnagramStrings();
+			IList<IList<string>> actual = exercises.GroupAnagrams(input);
+			AssertEqualIgnoringOrder(expected, actual);
+		}
+
+		public static IEnumerable<object[]> LatestTimeCatchTheBusMemberData()
+		{
+			yield return
+			[
+				new[] { 10, 20 },
+				new[] { 2, 17, 18, 19 },
+				2,
+				16,
+			];
+
+			yield return
+			[
+				new[] { 20, 30, 10 },
+				new[] { 19, 13, 26, 4, 25, 11, 21 },
+				2,
+				20,
+			];
+
+			yield return
+			[
+				new[] { 3 },
+				new[] { 2, 4 },
+				2,
+				3,
+			];
+
+			yield return
+			[
+				new[] { 5 },
+				new[] { 7, 8 },
+				1,
+				5,
+			];
+
+			yield return
+			[
+				new[] { 6, 8, 18, 17 },
+				new[] { 6, 8, 17 },
+				1,
+				18,
+			];
+		}
+
+		[Theory]
+		[MemberData(nameof(LatestTimeCatchTheBusMemberData))]
+		public void LatestTimeCatchTheBus(int[] buses, int[] passengers, int capacity, int expected)
+		{
+			var exercises = new TheLatestTimeToCatchABus();
+			int actual = exercises.LatestTimeCatchTheBus(buses, passengers, capacity);
+			Assert.Equal(expected, actual);
+		}
+
+		[Theory]
+		[InlineData(1, true)]
+		[InlineData(10, false)]
+		[InlineData(1521, false)]
+		public void ReorderedPowerOf2(int n, bool expected)
+		{
+			var exercises = new ReorderedPowerOfTwo();
+			bool actual = exercises.ReorderedPowerOf2(n);
+			Assert.Equal(expected, actual);
+		}
+
+		[Theory]
+		[InlineData(new[] { 2, 7, 11, 15 }, 9, new[] { 0, 1 })]
+		[InlineData(new[] { 3, 2, 4 }, 6, new[] { 1, 2 })]
+		[InlineData(new[] { 3, 3 }, 6, new[] { 0, 1 })]
+		public void TwoSum(int[] nums, int target, int[] expected)
+		{
+			var exercises = new TwoSumToTarget();
+			var actual = exercises.TwoSum(nums, target);
+			AssertEqualIgnoringOrder(expected, actual);
 		}
 	}
 }
