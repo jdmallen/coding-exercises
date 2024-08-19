@@ -1187,5 +1187,16 @@ namespace JDMallen.CodingExercises.Tests
 			var actual = exercises.TwoSum(nums, target);
 			AssertEqualIgnoringOrder(expected, actual);
 		}
+		
+		[Theory]
+		[InlineData("abc", "pqr", "apbqcr")]
+		[InlineData("ab", "pqrs", "abpqrs")]
+		[InlineData("abcd", "pq", "apbqcd")]
+		public void MergeStringsAlternately(string word1, string word2, string expected)
+		{
+			var exercises = new MergeStringsAlternately();
+			var actual = exercises.MergeAlternately(word1, word2);
+			AssertEqualIgnoringOrder(expected, actual);
+		}
 	}
 }
