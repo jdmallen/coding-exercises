@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JDMallen.CodingExercises.LeetCode
-{
-    public class LRUCacheDateTime
-    {
-        private readonly Dictionary<int, Tuple<int, DateTime>> _map;
-        private readonly int _capacity;
+namespace JDMallen.CodingExercises.LeetCode;
 
-        public LRUCacheDateTime(int capacity)
-        {
+public class LRUCacheDateTime
+{
+	private readonly Dictionary<int, Tuple<int, DateTime>> _map;
+	private readonly int _capacity;
+
+	public LRUCacheDateTime(int capacity)
+	{
             _map = new Dictionary<int, Tuple<int, DateTime>>();
             _capacity = capacity;
         }
 
-        public int Get(int key)
-        {
+	public int Get(int key)
+	{
             if (!_map.TryGetValue(key, out var val))
             {
                 return -1;
@@ -28,8 +28,8 @@ namespace JDMallen.CodingExercises.LeetCode
             return returnVal;
         }
 
-        public void Put(int key, int val)
-        {
+	public void Put(int key, int val)
+	{
             if (_map.Count == _capacity)
             {
                 var oldestKey = new KeyValuePair<int, Tuple<int, DateTime>>(
@@ -48,5 +48,4 @@ namespace JDMallen.CodingExercises.LeetCode
 
             _map[key] = Tuple.Create(val, DateTime.Now);
         }
-    }
 }

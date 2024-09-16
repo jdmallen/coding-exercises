@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JDMallen.CodingExercises.LeetCode
-{
-    public class LRUCacheLoop
-    {
-        private Dictionary<int, Tuple<int, int>> _map;
-        private readonly int _capacity;
-        private int _latestAccessed;
+namespace JDMallen.CodingExercises.LeetCode;
 
-        public LRUCacheLoop(int capacity)
-        {
+public class LRUCacheLoop
+{
+	private Dictionary<int, Tuple<int, int>> _map;
+	private readonly int _capacity;
+	private int _latestAccessed;
+
+	public LRUCacheLoop(int capacity)
+	{
             _map = new Dictionary<int, Tuple<int, int>>();
             _capacity = capacity;
             _latestAccessed = 0;
         }
 
-        public int Get(int key)
-        {
+	public int Get(int key)
+	{
             if (!_map.TryGetValue(key, out var val))
             {
                 return -1;
@@ -36,8 +36,8 @@ namespace JDMallen.CodingExercises.LeetCode
             return returnVal;
         }
 
-        public void Put(int key, int val)
-        {
+	public void Put(int key, int val)
+	{
             if (_map.ContainsKey(key))
             {
                 _map[key] = Tuple.Create(val, ++_latestAccessed);
@@ -67,8 +67,8 @@ namespace JDMallen.CodingExercises.LeetCode
             _map[key] = Tuple.Create(val, ++_latestAccessed);
         }
 
-        private void ResetAccessCounter()
-        {
+	private void ResetAccessCounter()
+	{
             _map = _map.OrderBy(kvp => kvp.Value.Item2)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             int i;
@@ -79,5 +79,4 @@ namespace JDMallen.CodingExercises.LeetCode
 
             _latestAccessed = i;
         }
-    }
 }
