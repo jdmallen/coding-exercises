@@ -6,21 +6,6 @@ namespace JDMallen.CodingExercises.LeetCode;
 
 public class MinimumNumberOfOperationsToMakeXAndYEqual
 {
-	/// <summary>
-	/// You are given two positive integers x and y.
-	/// 
-	/// In one operation, you can do one of the four following operations:
-	/// 
-	/// 1. Divide x by 11 if x is a multiple of 11.
-	/// 2. Divide x by 5 if x is a multiple of 5.
-	/// 3. Decrement x by 1.
-	/// 4. Increment x by 1.
-	/// 
-	/// Return the minimum number of operations required to make x and y equal.
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	public int MinimumOperationsToMakeEqual_NaiveAttempt(int x, int y)
 	{
 		const int proximity = 1;
@@ -86,21 +71,6 @@ public class MinimumNumberOfOperationsToMakeXAndYEqual
 		bool CloseToGreaterMultiple(int x, int z) => x % z >= z - proximity;
 	}
 
-	/// <summary>
-	/// You are given two positive integers x and y.
-	/// 
-	/// In one operation, you can do one of the four following operations:
-	/// 
-	/// 1. Divide x by 11 if x is a multiple of 11.
-	/// 2. Divide x by 5 if x is a multiple of 5.
-	/// 3. Decrement x by 1.
-	/// 4. Increment x by 1.
-	/// 
-	/// Return the minimum number of operations required to make x and y equal.
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
 	public int MinimumOperationsToMakeEqual(int x, int y)
 	{
 		if (x == y)

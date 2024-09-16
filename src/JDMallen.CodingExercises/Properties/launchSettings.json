@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "sandbox": {
+    "JDMallen.CodingExercises": {
       "commandName": "Project",
-      "commandLineArgs": "produce banana C:\\kafka_2.12-2.5.0\\config\\producer.properties",
+      "commandLineArgs": "",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }

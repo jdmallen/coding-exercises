@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using BenchmarkDotNet.Running;
-using JDMallen.CodingExercises.Graphs;
-using JDMallen.CodingExercises.LeetCode;
-using JDMallen.CodingExercises.Sorts;
 
 namespace JDMallen.CodingExercises
 {
@@ -34,13 +28,11 @@ namespace JDMallen.CodingExercises
 			//
 			// var summary = BenchmarkRunner.Run<CustomExercises>();
 			//
-			// TestDfs();
 			// Console.WriteLine();
-			// TestBfs();
 			//
 			// await ForLoopBreak();
 
-			var what = Enumerable.Range(1, 10).ToList().Shuffle();
+			// var what = Enumerable.Range(1, 10).ToList().Shuffle();
 
 
 		}
@@ -63,19 +55,7 @@ namespace JDMallen.CodingExercises
 
 			Console.WriteLine($"End");
 		}
-
-		private static void TestBfs()
-		{
-			var entryNode = Graph.GetGraph();
-			entryNode.TraverseBfs();
-		}
-
-		public static void TestDfs()
-		{
-			var entryNode = Graph.GetGraph();
-			entryNode.TraverseDfs();
-		}
-
+		
 		/// <summary>
 		/// Adapted from https://stackoverflow.com/a/3319652/3986790
 		/// </summary>

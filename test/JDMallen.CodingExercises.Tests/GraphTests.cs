@@ -1,4 +1,5 @@
-﻿using JDMallen.CodingExercises.Graphs;
+﻿using System.Linq;
+using JDMallen.CodingExercises.Graphs;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -9,8 +10,15 @@ namespace JDMallen.CodingExercises.Tests
 		[Fact]
 		public void TestDfs()
 		{
-			Node<string> entryNode = Graph.GetGraph();
-			entryNode.TraverseDfs();
+			var graph = Graph.GetSampleGraph();
+			graph.AllNodes.Single(n => n.Payload == "A").TraverseDfs();
+		}
+
+		[Fact]
+		public void TestBfs()
+		{
+			var graph = Graph.GetSampleGraph();
+			graph.AllNodes.Single(n => n.Payload == "A").TraverseBfs();
 		}
 	}
 }

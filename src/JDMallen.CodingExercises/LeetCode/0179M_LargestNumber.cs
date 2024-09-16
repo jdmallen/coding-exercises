@@ -5,28 +5,6 @@ namespace JDMallen.CodingExercises.LeetCode;
 
 public class LargestNumberFormedFromIntegers
 {
-	/// <summary>
-	/// Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.
-	/// 
-	/// Since the result may be very large, so you need to return a string instead of an integer.
-	///
-	/// Example 1:
-	/// 
-	/// Input: nums = [10,2]
-	/// Output: "210"
-	/// Example 2:
-	/// 
-	/// Input: nums = [3,30,34,5,9]
-	/// Output: "9534330"
-	/// 
-	/// 
-	/// Constraints:
-	/// 
-	/// 1 &lt;= nums.length &lt;= 100
-	/// 0 &lt;= nums[i] &lt;= 109
-	/// </summary>
-	/// <param name="nums"></param>
-	/// <returns></returns>
 	public string LargestNumber(int[] nums)
 	{
 		if (nums.Length == 1)

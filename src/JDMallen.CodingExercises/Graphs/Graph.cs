@@ -1,40 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace JDMallen.CodingExercises.Graphs
+namespace JDMallen.CodingExercises.Graphs;
+
+public class Graph
 {
-    public class Graph
-    {
-        public static HashSet<Node<string>> AllNodes { get; set; } = new HashSet<Node<string>>();
+	public HashSet<Node<string>> AllNodes { get; set; } = [];
 
+	public static Graph GetSampleGraph()
+	{
+		var graph = new Graph();
+		graph.Connect("A", "B");
+		graph.Connect("A", "C");
+		graph.Connect("A", "D");
+		graph.Connect("B", "E");
+		graph.Connect("C", "E");
+		graph.Connect("E", "G");
+		graph.Connect("D", "F");
+		return graph;
+	}
 
-        public static Node<string> GetGraph()
-        {
-            // f to e
-            // j to o
-            // i to m to l
-            // g to b
+	public void Connect(string payload, string destination)
+	{
+		// First, generate the string nodes if they don't yet exist
 
-            "A".ConnectsTo("B")
-                .ConnectsTo("F")
-                .ConnectsTo("J")
-                .ConnectsTo("N")
-                .ConnectsTo("C")
-                .ConnectsTo("A")
-                .ConnectsTo("D")
-                .ConnectsTo("H")
-                .ConnectsTo("I")
-                .ConnectsTo("L")
-                .ConnectsTo("G")
-                .ConnectsTo("K")
-                .ConnectsTo("Q")
-                .ConnectsTo("P");
-            "F".ConnectsTo("E");
-            "J".ConnectsTo("O");
-            "I".ConnectsTo("M").ConnectsTo("L");
-            "G".ConnectsTo("B");
+		if (AllNodes.All(n => n.Payload != payload))
+		{
+			AllNodes.Add(new Node<string>(payload));
+		}
 
-            return AllNodes.Single(n => n.Payload == "A");
-        }
-    }
+		Node<string> fromNode = AllNodes.Single(n => n.Payload == payload);
+
+		if (AllNodes.All(n => n.Payload != destination))
+		{
+			AllNodes.Add(new Node<string>(destination));
+		}
+
+		Node<string> toNode = AllNodes.Single(n => n.Payload == destination);
+
+		// Then connect them
+
+		if (!fromNode.AdjacencyList.Contains(toNode))
+		{
+			fromNode.AdjacencyList.Add(toNode);
+		}
+
+		if (!toNode.AdjacencyList.Contains(fromNode))
+		{
+			toNode.AdjacencyList.Add(fromNode);
+		}
+	}
 }
